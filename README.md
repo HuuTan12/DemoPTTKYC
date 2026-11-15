@@ -61,7 +61,7 @@ Dự án môn **Phân tích và Thiết kế Yêu cầu (Requirements Analysis a
 
 ## 3. Danh sách Tài khoản Demo (Table 41)
 
-Tất cả tài khoản đều dùng mật khẩu chung là **`123456`**:
+Tất cả tài khoản đều dùng mật khẩu chung là **`123456`**. Cột `password_hash` không lưu mật khẩu gốc mà lưu SHA-256 của chuỗi `username:password` (xem `UserAccount.hashPassword`), đúng với Table 36 trong báo cáo:
 
 | Username | Password | Họ tên | Vai trò (Role) | Ghi chú |
 |---|---|---|---|---|

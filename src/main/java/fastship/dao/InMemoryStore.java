@@ -89,13 +89,13 @@ public class InMemoryStore {
         vehicles.add(v2);
         vehicles.add(v3);
 
-        // 5. UserAccounts (Table 41 - all with demo password 123456)
-        userAccounts.add(new UserAccount(1, "customer01", "123456", "Nguyen Van An", Role.CUSTOMER, 1, null, true));
-        userAccounts.add(new UserAccount(2, "staff01", "123456", "Tran Thi Lan", Role.STAFF, null, null, true));
-        userAccounts.add(new UserAccount(3, "dispatch01", "123456", "Pham Minh Hoang", Role.DISPATCHER, null, null, true));
-        userAccounts.add(new UserAccount(4, "driver01", "123456", "Le Van Binh", Role.DRIVER, null, 1, true));
-        userAccounts.add(new UserAccount(5, "driver02", "123456", "Pham Thi Cuc", Role.DRIVER, null, 2, true));
-        userAccounts.add(new UserAccount(6, "manager01", "123456", "Le Quang", Role.MANAGER, null, null, true));
+        // 5. UserAccounts (Table 41 - demo password 123456, stored as a salted SHA-256 hash)
+        userAccounts.add(new UserAccount(1, "customer01", UserAccount.hashPassword("customer01", "123456"), "Nguyen Van An", Role.CUSTOMER, 1, null, true));
+        userAccounts.add(new UserAccount(2, "staff01", UserAccount.hashPassword("staff01", "123456"), "Tran Thi Lan", Role.STAFF, null, null, true));
+        userAccounts.add(new UserAccount(3, "dispatch01", UserAccount.hashPassword("dispatch01", "123456"), "Pham Minh Hoang", Role.DISPATCHER, null, null, true));
+        userAccounts.add(new UserAccount(4, "driver01", UserAccount.hashPassword("driver01", "123456"), "Le Van Binh", Role.DRIVER, null, 1, true));
+        userAccounts.add(new UserAccount(5, "driver02", UserAccount.hashPassword("driver02", "123456"), "Pham Thi Cuc", Role.DRIVER, null, 2, true));
+        userAccounts.add(new UserAccount(6, "manager01", UserAccount.hashPassword("manager01", "123456"), "Le Quang", Role.MANAGER, null, null, true));
 
         // 6. Sample pre-delivered order #1 (for Demo Step 10 - COD Difference check)
         Order sampleOrder = new Order();

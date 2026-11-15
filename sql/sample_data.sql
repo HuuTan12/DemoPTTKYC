@@ -32,14 +32,14 @@ INSERT INTO Vehicle (vehicle_id, driver_id, plate_no, vehicle_type, capacity_kg)
 (2, 2, '59X2-678.90', 'Motorbike', 50.00),
 (3, 3, '51C-456.78',  'Van',       500.00);
 
--- 6. User Accounts (Table 41 - all passwords are '123456')
+-- 6. User Accounts (Table 41 - demo password '123456', stored as SHA-256 of 'username:password')
 INSERT INTO UserAccount (user_id, username, password_hash, full_name, role, customer_id, driver_id, is_active) VALUES
-(1, 'customer01', '123456', 'Nguyen Van An',   'CUSTOMER',   1,    NULL, TRUE),
-(2, 'staff01',    '123456', 'Tran Thi Lan',    'STAFF',      NULL, NULL, TRUE),
-(3, 'dispatch01', '123456', 'Pham Minh Hoang', 'DISPATCHER', NULL, NULL, TRUE),
-(4, 'driver01',   '123456', 'Le Van Binh',     'DRIVER',     NULL, 1,    TRUE),
-(5, 'driver02',   '123456', 'Pham Thi Cuc',    'DRIVER',     NULL, 2,    TRUE),
-(6, 'manager01',  '123456', 'Le Quang',        'MANAGER',    NULL, NULL, TRUE);
+(1, 'customer01', SHA2(CONCAT('customer01', ':', '123456'), 256), 'Nguyen Van An',   'CUSTOMER',   1,    NULL, TRUE),
+(2, 'staff01', SHA2(CONCAT('staff01', ':', '123456'), 256), 'Tran Thi Lan',    'STAFF',      NULL, NULL, TRUE),
+(3, 'dispatch01', SHA2(CONCAT('dispatch01', ':', '123456'), 256), 'Pham Minh Hoang', 'DISPATCHER', NULL, NULL, TRUE),
+(4, 'driver01', SHA2(CONCAT('driver01', ':', '123456'), 256), 'Le Van Binh',     'DRIVER',     NULL, 1,    TRUE),
+(5, 'driver02', SHA2(CONCAT('driver02', ':', '123456'), 256), 'Pham Thi Cuc',    'DRIVER',     NULL, 2,    TRUE),
+(6, 'manager01', SHA2(CONCAT('manager01', ':', '123456'), 256), 'Le Quang',        'MANAGER',    NULL, NULL, TRUE);
 
 -- 7. Sample pre-delivered order (#1) for Demo Step 10 (UC6 - A2: COD Difference test)
 INSERT INTO orders (

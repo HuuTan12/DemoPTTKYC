@@ -76,12 +76,17 @@ public class DeliveryService {
         if (reasonNote == null || reasonNote.isBlank()) {
             throw new IllegalArgumentException("Please enter a note explaining why the proof is returned to the driver.");
         }
-        proof.returnToDriver("RETURNED TO DRIVER: " + reasonNote.trim());
         try {
-            deliveryProofDAO.saveOrUpdate(null, proof);
-        } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage(), e);
+    if (!DatabaseConnection.isMySqlAvailable()) {
+        deliveryProofDAO.saveOrUpdate(null, proof);
+    } else {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            deliveryProofDAO.saveOrUpdate(conn, proof);
         }
+    }
+        } catch (SQLException e) {
+        throw new RuntimeException(e.getMessage(), e);
+            }
     }
 
     /**

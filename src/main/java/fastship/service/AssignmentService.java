@@ -28,12 +28,17 @@ public class AssignmentService {
     }
 
     public int getNextAttemptNumber(int orderId) {
-        try {
+    try {
+        if (!DatabaseConnection.isMySqlAvailable()) {
             return assignmentDAO.getNextAttemptNo(null, orderId);
-        } catch (SQLException e) {
-            return 1;
         }
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            return assignmentDAO.getNextAttemptNo(conn, orderId);
+        }
+    } catch (SQLException e) {
+        return 1;
     }
+}
 
     /**
      * UC3 Assign Driver (FR-09, Table 19 & Figure 8).

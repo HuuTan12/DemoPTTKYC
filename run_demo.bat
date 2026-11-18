@@ -10,6 +10,7 @@ if %errorlevel% neq 0 (
     exit /b %errorlevel%
 )
 echo Launching FastShip GUI...
+set "FASTSHIP_DB_URL=jdbc:mysql://localhost:3307/fastship?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh&characterEncoding=UTF-8&connectTimeout=1000"
 set MYSQL_JAR=%USERPROFILE%\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar
 if exist "%MYSQL_JAR%" (
     java -cp "target\classes;%MYSQL_JAR%" fastship.ui.FastShipApp
